@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Allure LLC. All rights reserved.
+ * See COPYING.txt for license details.
+ * http://www.allureinc.co | support@allureinc.co
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<!-- For Magento < 2.2 -->
+	<preference for="\Magento\Framework\Mail\Transport" type="Allure\SmtpApp\Model\Transport"/>
+	<type name="Allure\SmtpApp\Model\Transport">
+		<plugin sortOrder="100" name="allureSmtpAppTransport" type="Allure\SmtpApp\Plugin\Mail\TransportPlugin"/>
+	</type>
+
+	<!-- For Magento Eq 2.2 -->
+	<type name="\Magento\Framework\Mail\TransportInterface">
+		<plugin sortOrder="100" name="allureSmtpAppTransportInterface" type="Allure\SmtpApp\Plugin\Mail\TransportPlugin"/>
+	</type>
+
+	<type name="Magento\Framework\Mail\Template\TransportBuilder">
+		<plugin sortOrder="1" name="allureSmtpAppTransportBuilder"
+				type="Allure\SmtpApp\Plugin\Mail\Template\TransportBuilderPlugin"/>
+	</type>
+
+    <type name="Magento\Framework\Mail\Template\TransportBuilderByStore">
+        <plugin sortOrder="1" name="allureSmtpAppTransportBuilderByStore"
+                type="Allure\SmtpApp\Plugin\Mail\Template\TransportBuilderByStorePlugin"/>
+    </type>
+</config>
